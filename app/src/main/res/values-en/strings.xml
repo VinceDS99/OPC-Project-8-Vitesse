@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">Vitesse</string>
+
+    <!-- Home screen -->
+    <string name="loading_message">Loading…</string>
+    <string name="no_candidate">No candidate</string>
+    <string name="search_placeholder">Search for a candidate</string>
+    <string name="tab_all">All</string>
+    <string name="tab_favorites">Favorites</string>
+
+    <!-- General messages -->
+    <string name="error_loading">Error loading</string>
+    <string name="retry">Retry</string>
+</resources>

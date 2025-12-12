@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <!-- Barre de recherche -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/search_bar_height"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:cardCornerRadius="@dimen/search_bar_corner_radius"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="@string/search_placeholder"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:textSize="@dimen/text_size_medium"
+            android:importantForAutofill="no" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Onglets Tous / Favoris -->
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/searchBar">
+
+        <!-- Onglet Tous -->
+        <LinearLayout
+            android:id="@+id/tabAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/margin_medium"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/tvTabAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_all"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:textColor="@color/primary" />
+
+            <View
+                android:id="@+id/indicatorAll"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/tab_indicator_height"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/primary"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <!-- Onglet Favoris -->
+        <LinearLayout
+            android:id="@+id/tabFavorites"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/margin_medium"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/tvTabFavorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_favorites"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@android:color/darker_gray" />
+
+            <View
+                android:id="@+id/indicatorFavorites"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/tab_indicator_height"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/primary"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- RecyclerView pour la liste des candidats -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCandidates"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/margin_small"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        tools:listitem="@layout/item_candidate" />
+
+    <!-- Message "Aucun candidat" -->
+    <TextView
+        android:id="@+id/tvNoCandidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_candidate"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <!-- État de chargement -->
+    <LinearLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary" />
+
+        <TextView
+            android:id="@+id/tvLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/loading_message"
+            android:textSize="16sp"
+            android:textColor="@color/primary_variant" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
