@@ -1,6 +1,8 @@
 package com.example.vitesse
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vitesse.databinding.ActivityMainBinding
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupTabs()
+        setupSearch()
         setupObservers()
+        setupFab()
 
         // Observer les changements de candidats
         viewModel.observeCandidates()
@@ -76,6 +81,41 @@ class MainActivity : AppCompatActivity() {
         // Clic sur l'onglet "Favoris"
         binding.tabFavorites.setOnClickListener {
             viewModel.setActiveTab(TabType.FAVORITES)
+        }
+    }
+
+    private fun setupSearch() {
+        // TextWatcher pour écouter les changements dans la barre de recherche
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Pas utilisé
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Mettre à jour la recherche à chaque caractère saisi
+                val query = s?.toString() ?: ""
+                viewModel.setSearchQuery(query)
+                Log.d("MainActivity", "Recherche: '$query'")
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Pas utilisé
+            }
+        })
+
+        // Optionnel : Clic sur l'icône loupe (peut déclencher la recherche ou autre action)
+        binding.ivSearchIcon.setOnClickListener {
+            // Pour l'instant, ne fait rien (la recherche est en temps réel)
+            Log.d("MainActivity", "Icône recherche cliquée")
+        }
+    }
+
+    private fun setupFab() {
+        // Clic sur le bouton d'ajout
+        binding.fabAddCandidate.setOnClickListener {
+            Log.d("MainActivity", "FAB cliqué - Navigation vers AddCandidateActivity")
+            val intent = Intent(this, AddCandidateActivity::class.java)
+            startActivity(intent)
         }
     }
 

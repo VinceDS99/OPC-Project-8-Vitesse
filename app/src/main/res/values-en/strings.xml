@@ -9,8 +9,35 @@
     <string name="search_placeholder">Search for a candidate</string>
     <string name="tab_all">All</string>
     <string name="tab_favorites">Favorites</string>
+    <string name="add_candidate">Add candidate</string>
+
+    <!-- Add candidate page -->
+    <string name="add_candidate_title">Add a candidate</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="select_date">Select a date</string>
+    <string name="enter_date">Enter a date</string>
+    <string name="date">Date</string>
+    <string name="expected_salary">Expected salary</string>
+    <string name="notes">Note</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="select_photo">Select photo</string>
+
+    <!-- Error messages -->
+    <string name="error_loading">Error loading</string>
+    <string name="error_first_name_required">First name is required</string>
+    <string name="error_last_name_required">Last name is required</string>
+    <string name="error_phone_required">Phone is required</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_email_invalid">Invalid email format</string>
+    <string name="error_date_required">Birth date is required</string>
+    <string name="error_salary_required">Expected salary is required</string>
+    <string name="error_notes_required">Notes are required</string>
+    <string name="candidate_added">Candidate added successfully</string>
 
     <!-- General messages -->
-    <string name="error_loading">Error loading</string>
     <string name="retry">Retry</string>
 </resources>

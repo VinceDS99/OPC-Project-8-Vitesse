@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vitesse">
 
+        <!-- Activity principale -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,6 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Activity d'ajout de candidat -->
+        <activity
+            android:name=".AddCandidateActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/add_candidate_title" />
 
     </application>
 

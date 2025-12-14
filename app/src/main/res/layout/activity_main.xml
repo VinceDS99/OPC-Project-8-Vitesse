@@ -10,6 +10,7 @@
     tools:context=".MainActivity">
 
     <!-- Barre de recherche -->
+    <!-- Barre de recherche -->
     <androidx.cardview.widget.CardView
         android:id="@+id/searchBar"
         android:layout_width="0dp"
@@ -24,18 +25,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.9">
 
-        <EditText
-            android:id="@+id/etSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:hint="@string/search_placeholder"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingStart="@dimen/margin_medium"
-            android:paddingEnd="@dimen/margin_medium"
-            android:textSize="@dimen/text_size_medium"
-            android:importantForAutofill="no" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_placeholder"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingEnd="@dimen/margin_small"
+                android:textSize="@dimen/text_size_medium"
+                android:importantForAutofill="no" />
+
+            <ImageView
+                android:id="@+id/ivSearchIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:src="@drawable/search_icon"
+                android:contentDescription="@string/search_placeholder"
+                android:scaleType="centerInside" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -169,5 +188,19 @@
             android:textColor="@color/primary_variant" />
 
     </LinearLayout>
+
+    <!-- Bouton d'ajout -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddCandidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:contentDescription="@string/add_candidate"
+        android:src="@drawable/add_icon"
+        app:tint="@color/on_primary"
+        app:backgroundTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

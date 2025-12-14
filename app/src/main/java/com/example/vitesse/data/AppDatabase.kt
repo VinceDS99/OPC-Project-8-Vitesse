@@ -47,10 +47,10 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         suspend fun populateDatabase(candidateDao: CandidateDao) {
-            // Supprimer tout (pour le développement)
+
             candidateDao.deleteAllCandidates()
 
-            // Insérer 8 candidats de test
+            // Insetion de 8 candidats
             val candidates = listOf(
                 Candidate(
                     firstName = "Jean",
