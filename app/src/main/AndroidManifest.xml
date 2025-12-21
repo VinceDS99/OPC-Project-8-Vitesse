@@ -29,6 +29,19 @@
             android:windowSoftInputMode="adjustResize"
             android:label="@string/add_candidate_title" />
 
+        <!-- Activity de détails du candidat -->
+        <activity
+            android:name=".CandidateDetailActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Activity de modification de candidat -->
+        <activity
+            android:name=".EditCandidateActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/edit_candidate_title" />
+
     </application>
 
 </manifest>

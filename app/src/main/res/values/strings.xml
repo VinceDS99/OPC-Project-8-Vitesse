@@ -21,23 +21,45 @@
     <string name="enter_date">Entrer une date</string>
     <string name="date">Date</string>
     <string name="expected_salary">Prétentions salariales</string>
-    <string name="notes">Note</string>
+    <string name="notes">Notes</string>
     <string name="save">Sauvegarder</string>
     <string name="back">Retour</string>
     <string name="select_photo">Sélectionner une photo</string>
 
     <!-- Messages d'erreur -->
     <string name="error_loading">Erreur lors du chargement</string>
-    <string name="error_first_name_required">Le prénom est requis</string>
-    <string name="error_last_name_required">Le nom est requis</string>
-    <string name="error_phone_required">Le téléphone est requis</string>
-    <string name="error_email_required">L\'email est requis</string>
-    <string name="error_email_invalid">Format d\'email invalide</string>
-    <string name="error_date_required">La date de naissance est requise</string>
-    <string name="error_salary_required">La prétention salariale est requise</string>
-    <string name="error_notes_required">Les notes sont requises</string>
+    <string name="mandatory_field">Champ obligatoire</string>
+    <string name="invalid_format">Format invalide</string>
     <string name="candidate_added">Candidat ajouté avec succès</string>
 
     <!-- Messages généraux -->
     <string name="retry">Réessayer</string>
+
+    <!-- Écran de détails -->
+
+    <string name="edit_candidate_title">Modifier un candidat</string>
+    <string name="candidate_updated">Candidat modifié avec succès</string>
+
+    <string name="deletion_title">Suppression</string>
+    <string name="deletion_message">Êtes-vous sûr de vouloir supprimer ce candidat? Cette action est irréversible.</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="candidate_deleted">Candidat supprimé</string>
+    <string name="date_placeholder">jj/mm/aaaa</string>
+    <string name="conversion">soit</string>
+
+    <string name="phone_action">Téléphone</string>
+    <string name="sms_action">SMS</string>
+    <string name="email_action">E-mail</string>
+    <string name="about">À propos</string>
+    <string name="birthday">Anniversaire</string>
+    <string name="expected_salary_title">Prétentions salariales</string>
+    <string name="notes_title">Notes</string>
+    <string name="years_old">%d ans</string>
+    <string name="edit">Modifier</string>
+    <string name="delete">Supprimer</string>
+    <string name="add_to_favorites">Ajouter aux favoris</string>
+    <string name="remove_from_favorites">Retirer des favoris</string>
+
+
 </resources>

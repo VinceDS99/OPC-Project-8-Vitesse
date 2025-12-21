@@ -10,7 +10,6 @@
     tools:context=".MainActivity">
 
     <!-- Barre de recherche -->
-    <!-- Barre de recherche -->
     <androidx.cardview.widget.CardView
         android:id="@+id/searchBar"
         android:layout_width="0dp"
@@ -20,6 +19,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         app:cardCornerRadius="@dimen/search_bar_corner_radius"
         app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/primary_variant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +38,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/search_placeholder"
+                android:textColorHint="@color/on_primary"
+                android:textColor="@color/on_primary"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingStart="@dimen/margin_medium"
@@ -51,6 +53,7 @@
                 android:layout_height="24dp"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:src="@drawable/search_icon"
+                app:tint="@color/on_primary"
                 android:contentDescription="@string/search_placeholder"
                 android:scaleType="centerInside" />
 
@@ -64,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/searchBar">
 
@@ -132,6 +136,18 @@
 
     </LinearLayout>
 
+
+    <!-- Trait horizontal sous les onglets -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="-16dp"/>
+
     <!-- RecyclerView pour la liste des candidats -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCandidates"
@@ -141,7 +157,7 @@
         android:paddingTop="@dimen/margin_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@id/divider"
         tools:listitem="@layout/item_candidate" />
 
     <!-- Message "Aucun candidat" -->
@@ -157,7 +173,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <!-- État de chargement -->
     <LinearLayout
@@ -169,7 +185,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout">
+        app:layout_constraintTop_toBottomOf="@id/divider">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -198,9 +214,10 @@
         android:layout_marginBottom="@dimen/margin_medium"
         android:contentDescription="@string/add_candidate"
         android:src="@drawable/add_icon"
-        app:tint="@color/on_primary"
-        app:backgroundTint="@color/primary"
+        app:tint="@color/primary"
+        app:backgroundTint="@color/primary_variant"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

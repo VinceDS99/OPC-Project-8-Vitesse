@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CandidateDao {
 
-    @Query("SELECT * FROM candidates ORDER BY lastName ASC, firstName ASC")
+    @Query("SELECT * FROM candidates ORDER BY id ASC")
     fun getAllCandidates(): Flow<List<Candidate>>
 
     @Query("SELECT * FROM candidates WHERE isFavorite = 1 ORDER BY lastName ASC, firstName ASC")

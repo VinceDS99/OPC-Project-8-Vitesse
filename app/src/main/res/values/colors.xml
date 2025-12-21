@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Couleurs principales de l'application Vitesse -->
-    <color name="primary">#DF9780</color>
-    <color name="primary_variant">#749FB8</color>
-    <color name="on_primary">#FFFFFF</color>
+<!--    &lt;!&ndash; Couleurs principales de l'application Vitesse &ndash;&gt;-->
+<!--    <color name="primary">#DF9780</color>-->
+<!--    <color name="primary_variant">#749FB8</color>-->
+<!--    <color name="on_primary">#FFFFFF</color>-->
 
-    <color name="secondary">#E8B952</color>
-    <color name="secondary_variant">#E8B952</color>
+<!--    <color name="secondary">#E8B952</color>-->
+<!--    <color name="secondary_variant">#E8B952</color>-->
+<!--    <color name="on_secondary">#FFFFFF</color>-->
+
+<!--    &lt;!&ndash; Couleurs système de base &ndash;&gt;-->
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+
+<!--    &lt;!&ndash; Couleurs pour le fond et surfaces &ndash;&gt;-->
+<!--    <color name="background">#FFFFFF</color>-->
+<!--    <color name="surface">#FFFFFF</color>-->
+
+    <!-- Couleurs principales de l'application Vitesse -->
+    <color name="primary">#6750A4</color>
+    <color name="primary_variant">#ECE6F0</color>
+    <color name="on_primary">#49454F</color>
+
+    <color name="secondary">#FEF7FF</color>
+    <color name="secondary_variant">#79747E</color>
     <color name="on_secondary">#FFFFFF</color>
 
     <!-- Couleurs système de base -->
-    <color name="black">#FF000000</color>
+    <color name="black">#1D1B20</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="divider">#E6E0E9</color>
 
     <!-- Couleurs pour le fond et surfaces -->
     <color name="background">#FFFFFF</color>
-    <color name="surface">#FFFFFF</color>
+    <color name="surface">#CAC4D0</color>
+
 </resources>

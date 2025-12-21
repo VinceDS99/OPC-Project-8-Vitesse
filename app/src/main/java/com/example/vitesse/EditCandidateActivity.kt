@@ -18,17 +18,23 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.vitesse.databinding.ActivityAddCandidateBinding
 import java.util.Calendar
 
-class AddCandidateActivity : AppCompatActivity() {
+class EditCandidateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddCandidateBinding
-    private val viewModel: AddCandidateViewModel by viewModels()
+    private val viewModel: EditCandidateViewModel by viewModels()
     private var selectedPhotoUri: Uri? = null
     private var selectedDate: String = ""
+    private var candidateId: Long = -1L
+    private var currentIsFavorite: Boolean = false
+
+    companion object {
+        const val EXTRA_CANDIDATE_ID = "candidate_id"
+    }
 
     // Photo picker launcher (ActivityResult API)
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            Log.d("AddCandidate", "Photo sélectionnée: $uri")
+            Log.d("EditCandidate", "Photo sélectionnée: $uri")
             selectedPhotoUri = uri
 
             // Afficher la photo sélectionnée
@@ -40,12 +46,12 @@ class AddCandidateActivity : AppCompatActivity() {
                     uri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
-                Log.d("AddCandidate", "Permission persistante obtenue pour: $uri")
+                Log.d("EditCandidate", "Permission persistante obtenue pour: $uri")
             } catch (e: SecurityException) {
-                Log.e("AddCandidate", "Impossible d'obtenir la permission persistante", e)
+                Log.e("EditCandidate", "Impossible d'obtenir la permission persistante", e)
             }
         } else {
-            Log.d("AddCandidate", "Aucune photo sélectionnée")
+            Log.d("EditCandidate", "Aucune photo sélectionnée")
         }
     }
 
@@ -55,10 +61,21 @@ class AddCandidateActivity : AppCompatActivity() {
         // Activer le mode Edge-to-Edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        Log.d("AddCandidate", "Activity créée")
+        Log.d("EditCandidate", "Activity créée")
 
         binding = ActivityAddCandidateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Récupérer l'ID du candidat
+        candidateId = intent.getLongExtra(EXTRA_CANDIDATE_ID, -1L)
+        if (candidateId == -1L) {
+            Log.e("EditCandidate", "ID candidat invalide")
+            finish()
+            return
+        }
+
+        // Changer le titre
+        binding.tvTitle.text = getString(R.string.edit_candidate_title)
 
         // Gérer les insets système
         setupWindowInsets()
@@ -66,6 +83,9 @@ class AddCandidateActivity : AppCompatActivity() {
         setupListeners()
         setupFieldValidation()
         setupObservers()
+
+        // Charger les données du candidat
+        viewModel.loadCandidate(candidateId)
     }
 
     private fun setupWindowInsets() {
@@ -87,32 +107,32 @@ class AddCandidateActivity : AppCompatActivity() {
     private fun setupListeners() {
         // Bouton retour (flèche)
         binding.ivBack.setOnClickListener {
-            Log.d("AddCandidate", "Bouton retour cliqué")
+            Log.d("EditCandidate", "Bouton retour cliqué")
             finish() // Retour à l'écran précédent
         }
 
         // Sélection de photo de profil
         binding.ivProfilePhoto.setOnClickListener {
-            Log.d("AddCandidate", "Photo de profil cliquée - Ouverture du sélecteur")
+            Log.d("EditCandidate", "Photo de profil cliquée - Ouverture du sélecteur")
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         // Sélection de date - Clic sur le champ de texte
         binding.etDate.setOnClickListener {
-            Log.d("AddCandidate", "Champ date cliqué")
+            Log.d("EditCandidate", "Champ date cliqué")
             showDatePicker()
         }
 
         // Sélection de date - Clic sur l'icône calendrier
         binding.ivCalendar.setOnClickListener {
-            Log.d("AddCandidate", "Icône calendrier cliqué")
+            Log.d("EditCandidate", "Icône calendrier cliqué")
             showDatePicker()
         }
 
         // Bouton sauvegarder
         binding.btnSave.setOnClickListener {
-            Log.d("AddCandidate", "Bouton sauvegarder cliqué")
-            saveCandidate()
+            Log.d("EditCandidate", "Bouton sauvegarder cliqué")
+            updateCandidate()
         }
     }
 
@@ -170,7 +190,7 @@ class AddCandidateActivity : AppCompatActivity() {
                 // Effacer l'erreur dès qu'une date est sélectionnée
                 binding.tilDate.error = null
 
-                Log.d("AddCandidate", "Date sélectionnée: $selectedDate")
+                Log.d("EditCandidate", "Date sélectionnée: $selectedDate")
             },
             year,
             month,
@@ -183,7 +203,7 @@ class AddCandidateActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun saveCandidate() {
+    private fun updateCandidate() {
         // Récupérer les valeurs des champs
         val firstName = binding.etFirstName.text.toString()
         val lastName = binding.etLastName.text.toString()
@@ -194,18 +214,18 @@ class AddCandidateActivity : AppCompatActivity() {
         val notes = binding.etNotes.text.toString()
         val photoUri = selectedPhotoUri?.toString()
 
-        Log.d("AddCandidate", "Tentative de sauvegarde:")
-        Log.d("AddCandidate", "  - Prénom: $firstName")
-        Log.d("AddCandidate", "  - Nom: $lastName")
-        Log.d("AddCandidate", "  - Téléphone: $phone")
-        Log.d("AddCandidate", "  - Email: $email")
-        Log.d("AddCandidate", "  - Date: $dateOfBirth")
-        Log.d("AddCandidate", "  - Salaire: $salary")
-        Log.d("AddCandidate", "  - Notes: ${notes.take(50)}...")
-        Log.d("AddCandidate", "  - Photo URI: $photoUri")
+        Log.d("EditCandidate", "Tentative de modification:")
+        Log.d("EditCandidate", "  - Prénom: $firstName")
+        Log.d("EditCandidate", "  - Nom: $lastName")
+        Log.d("EditCandidate", "  - Téléphone: $phone")
+        Log.d("EditCandidate", "  - Email: $email")
+        Log.d("EditCandidate", "  - Date: $dateOfBirth")
+        Log.d("EditCandidate", "  - Salaire: $salary")
+        Log.d("EditCandidate", "  - Photo URI: $photoUri")
 
         // Appeler le ViewModel pour valider et sauvegarder
-        viewModel.saveCandidate(
+        viewModel.updateCandidate(
+            candidateId = candidateId,
             firstName = firstName,
             lastName = lastName,
             phone = phone,
@@ -213,16 +233,24 @@ class AddCandidateActivity : AppCompatActivity() {
             dateOfBirth = dateOfBirth,
             expectedSalary = salary,
             notes = notes,
-            profilePhotoUri = photoUri
+            profilePhotoUri = photoUri,
+            isFavorite = currentIsFavorite
         )
     }
 
     private fun setupObservers() {
-        // Observer le succès de la sauvegarde
-        viewModel.saveSuccess.observe(this) { success ->
+        // Observer le candidat chargé
+        viewModel.candidate.observe(this) { candidate ->
+            candidate?.let {
+                fillFormWithCandidateData(it)
+            }
+        }
+
+        // Observer le succès de la modification
+        viewModel.updateSuccess.observe(this) { success ->
             if (success) {
-                Log.d("AddCandidate", "Candidat sauvegardé avec succès")
-                Toast.makeText(this, R.string.candidate_added, Toast.LENGTH_SHORT).show()
+                Log.d("EditCandidate", "Candidat modifié avec succès")
+                Toast.makeText(this, R.string.candidate_updated, Toast.LENGTH_SHORT).show()
                 finish() // Retour à l'écran d'accueil
             }
         }
@@ -249,8 +277,38 @@ class AddCandidateActivity : AppCompatActivity() {
         }
     }
 
+    private fun fillFormWithCandidateData(candidate: com.example.vitesse.data.Candidate) {
+        // Remplir les champs avec les données existantes
+        binding.etFirstName.setText(candidate.firstName)
+        binding.etLastName.setText(candidate.lastName)
+        binding.etPhone.setText(candidate.phoneNumber)
+        binding.etEmail.setText(candidate.email)
+        binding.etDate.setText(candidate.dateOfBirth)
+        binding.etSalary.setText(candidate.expectedSalary.toInt().toString())
+        binding.etNotes.setText(candidate.notes)
+
+        // Sauvegarder la date
+        selectedDate = candidate.dateOfBirth
+
+        // Sauvegarder le statut favori
+        currentIsFavorite = candidate.isFavorite
+
+        // Photo de profil
+        if (candidate.profilePhotoUrl != null) {
+            try {
+                val uri = Uri.parse(candidate.profilePhotoUrl)
+                selectedPhotoUri = uri
+                binding.ivProfilePhoto.setImageURI(uri)
+            } catch (e: Exception) {
+                binding.ivProfilePhoto.setImageResource(R.drawable.default_add_profile_picture)
+            }
+        } else {
+            binding.ivProfilePhoto.setImageResource(R.drawable.default_add_profile_picture)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("AddCandidate", "Activity détruite")
+        Log.d("EditCandidate", "Activity détruite")
     }
 }

@@ -11,12 +11,15 @@ import com.example.vitesse.data.Candidate
 import com.example.vitesse.data.CandidateRepository
 import kotlinx.coroutines.launch
 
-class AddCandidateViewModel(application: Application) : AndroidViewModel(application) {
+class EditCandidateViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: CandidateRepository
 
-    private val _saveSuccess = MutableLiveData<Boolean>()
-    val saveSuccess: LiveData<Boolean> = _saveSuccess
+    private val _candidate = MutableLiveData<Candidate?>()
+    val candidate: LiveData<Candidate?> = _candidate
+
+    private val _updateSuccess = MutableLiveData<Boolean>()
+    val updateSuccess: LiveData<Boolean> = _updateSuccess
 
     // Erreurs pour chaque champ
     private val _firstNameError = MutableLiveData<String?>()
@@ -39,7 +42,15 @@ class AddCandidateViewModel(application: Application) : AndroidViewModel(applica
         repository = CandidateRepository(candidateDao)
     }
 
-    fun saveCandidate(
+    fun loadCandidate(candidateId: Long) {
+        viewModelScope.launch {
+            val candidate = repository.getCandidateById(candidateId)
+            _candidate.value = candidate
+        }
+    }
+
+    fun updateCandidate(
+        candidateId: Long,
         firstName: String,
         lastName: String,
         phone: String,
@@ -47,7 +58,8 @@ class AddCandidateViewModel(application: Application) : AndroidViewModel(applica
         dateOfBirth: String,
         expectedSalary: String,
         notes: String,
-        profilePhotoUri: String?
+        profilePhotoUri: String?,
+        isFavorite: Boolean
     ) {
         // Réinitialiser toutes les erreurs
         clearAllErrors()
@@ -90,12 +102,13 @@ class AddCandidateViewModel(application: Application) : AndroidViewModel(applica
 
         // Si au moins une erreur, ne pas sauvegarder
         if (hasError) {
-            _saveSuccess.value = false
+            _updateSuccess.value = false
             return
         }
 
-        // Créer le candidat
-        val candidate = Candidate(
+        // Créer le candidat mis à jour
+        val updatedCandidate = Candidate(
+            id = candidateId,
             firstName = firstName.trim(),
             lastName = lastName.trim(),
             phoneNumber = phone.trim(),
@@ -104,16 +117,16 @@ class AddCandidateViewModel(application: Application) : AndroidViewModel(applica
             expectedSalary = expectedSalary.toDoubleOrNull() ?: 0.0,
             notes = notes.trim(),
             profilePhotoUrl = profilePhotoUri,
-            isFavorite = false
+            isFavorite = isFavorite
         )
 
         // Sauvegarder dans la base de données
         viewModelScope.launch {
             try {
-                repository.insert(candidate)
-                _saveSuccess.value = true
+                repository.update(updatedCandidate)
+                _updateSuccess.value = true
             } catch (e: Exception) {
-                _saveSuccess.value = false
+                _updateSuccess.value = false
             }
         }
     }

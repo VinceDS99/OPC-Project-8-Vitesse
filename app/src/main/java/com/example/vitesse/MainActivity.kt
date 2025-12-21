@@ -62,8 +62,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = CandidateAdapter { candidate ->
-            // TODO: Gérer le clic sur un candidat (navigation vers les détails)
+            // Navigation vers les détails
             Log.d("MainActivity", "Candidat cliqué: ${candidate.firstName} ${candidate.lastName}")
+            val intent = Intent(this, CandidateDetailActivity::class.java)
+            intent.putExtra(CandidateDetailActivity.EXTRA_CANDIDATE_ID, candidate.id)
+            startActivity(intent)
         }
 
         binding.rvCandidates.apply {

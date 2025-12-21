@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/primary</item>
+        <item name="android:textColorHint">@color/primary</item>
+        <item name="boxStrokeColor">@color/primary</item>
+    </style>
+
+    <style name="EmailInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/primary_variant</item>
+        <item name="android:textColorHint">@color/on_primary</item>
+        <item name="boxStrokeColor">@color/primary</item>
+    </style>
+</resources>

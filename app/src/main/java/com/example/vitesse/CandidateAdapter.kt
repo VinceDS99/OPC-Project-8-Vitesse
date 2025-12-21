@@ -1,5 +1,7 @@
 package com.example.vitesse
 
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -34,7 +36,7 @@ class CandidateAdapter(
 
         fun bind(candidate: Candidate) {
             binding.apply {
-                // Nom complet
+                // Nom complet : Prénom + NOM DE FAMILLE EN MAJUSCULES
                 tvName.text = "${candidate.firstName} ${candidate.lastName.uppercase(Locale.getDefault())}"
 
                 // Notes
@@ -42,9 +44,18 @@ class CandidateAdapter(
 
                 // Photo de profil
                 if (candidate.profilePhotoUrl != null) {
-                    ivProfilePhoto.setImageResource(R.drawable.default_profile_picture)
+                    try {
+                        // Charger l'image depuis l'URI
+                        val uri = Uri.parse(candidate.profilePhotoUrl)
+                        ivProfilePhoto.setImageURI(uri)
+                        Log.d("CandidateAdapter", "Image chargée depuis URI: $uri")
+                    } catch (e: Exception) {
+                        Log.e("CandidateAdapter", "Erreur lors du chargement de l'image: ${e.message}")
+                        // En cas d'erreur, utiliser l'image par défaut
+                        ivProfilePhoto.setImageResource(R.drawable.default_profile_picture)
+                    }
                 } else {
-                    // Photo par défaut
+                    // Photo par défaut si aucune URI
                     ivProfilePhoto.setImageResource(R.drawable.default_profile_picture)
                 }
 
