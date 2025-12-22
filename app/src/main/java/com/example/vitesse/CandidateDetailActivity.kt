@@ -126,20 +126,28 @@ class CandidateDetailActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirmationDialog() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.deletion_title)
-            .setMessage(R.string.deletion_message)
-            .setPositiveButton(R.string.confirm) { dialog, _ ->
-                // Confirmer la suppression
-                viewModel.deleteCandidate()
-                dialog.dismiss()
-            }
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
-                // Annuler
-                dialog.dismiss()
-            }
+        val dialogView = layoutInflater.inflate(R.layout.dialog_delete_confirmation, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
             .setCancelable(true)
-            .show()
+            .create()
+
+        // Fond transparent avec effet dim
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setDimAmount(0.7f)
+
+        // Gérer les clics sur les boutons
+        dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnConfirm).setOnClickListener {
+            viewModel.deleteCandidate()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun setupObservers() {

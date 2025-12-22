@@ -82,7 +82,7 @@
             android:padding="@dimen/margin_medium"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground">
+            android:background="@drawable/tab_ripple">
 
             <TextView
                 android:id="@+id/tvTabAll"
@@ -114,7 +114,7 @@
             android:padding="@dimen/margin_medium"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground">
+            android:background="@drawable/tab_ripple">
 
             <TextView
                 android:id="@+id/tvTabFavorites"
@@ -146,7 +146,7 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="-16dp"/>
+        android:layout_marginTop="-16dp" />
 
     <!-- RecyclerView pour la liste des candidats -->
     <androidx.recyclerview.widget.RecyclerView

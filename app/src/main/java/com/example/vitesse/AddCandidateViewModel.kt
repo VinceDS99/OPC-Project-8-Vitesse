@@ -119,7 +119,23 @@ class AddCandidateViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        // Essayer d'utiliser Patterns.EMAIL_ADDRESS si disponible (runtime Android)
+        // Sinon utiliser une regex simple (pour les tests unitaires)
+        return try {
+            Patterns.EMAIL_ADDRESS?.matcher(email)?.matches() ?: isValidEmailRegex(email)
+        } catch (e: Exception) {
+            // Fallback sur regex si Patterns n'est pas disponible
+            isValidEmailRegex(email)
+        }
+    }
+
+    /**
+     * Validation email par regex pour les tests unitaires
+     * et comme fallback si Patterns.EMAIL_ADDRESS n'est pas disponible
+     */
+    private fun isValidEmailRegex(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()
+        return emailRegex.matches(email)
     }
 
     private fun clearAllErrors() {

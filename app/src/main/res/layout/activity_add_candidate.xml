@@ -8,13 +8,23 @@
     android:background="@color/background"
     android:fitsSystemWindows="true">
 
+    <!-- Fond de la barre de titre -->
+    <View
+        android:id="@+id/vTitleBackground"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- ScrollView pour le contenu défilant -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vTitleBackground"
         app:layout_constraintBottom_toTopOf="@id/btnSave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -24,27 +34,17 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_medium">
 
-            <!-- Fond de la barre de titre -->
-            <View
-                android:id="@+id/vTitleBackground"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/secondary"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
             <!-- Barre de titre -->
             <ImageView
                 android:id="@+id/ivBack"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_marginTop="-45dp"
                 android:src="@drawable/arrow_left_icon"
                 android:contentDescription="@string/back"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:layout_marginTop="@dimen/margin_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,10 +53,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginTop="-45dp"
                 android:text="@string/add_candidate_title"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="@id/ivBack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivBack"
