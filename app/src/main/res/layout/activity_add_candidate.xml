@@ -18,6 +18,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Barre de titre avec flèche et texte -->
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/arrow_left_icon"
+        android:contentDescription="@string/back"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/vTitleBackground" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:text="@string/add_candidate_title"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ivBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivBack"
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
+
     <!-- ScrollView pour le contenu défilant -->
     <ScrollView
         android:id="@+id/scrollView"
@@ -34,46 +63,17 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_medium">
 
-            <!-- Barre de titre -->
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="-45dp"
-                android:src="@drawable/arrow_left_icon"
-                android:contentDescription="@string/back"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="-45dp"
-                android:text="@string/add_candidate_title"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/primary"
-                app:layout_constraintBottom_toBottomOf="@id/ivBack"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivBack"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <!-- Photo de profil -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvProfilePhoto"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.95">
 
                 <ImageView
@@ -265,10 +265,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/enter_date"
-
                             android:textSize="24sp"
-                            android:textColor="@color/black"
-                             />
+                            android:textColor="@color/black" />
 
                         <ImageView
                             android:id="@+id/ivCalendar"
@@ -300,8 +298,7 @@
                             android:inputType="none"
                             android:focusable="true"
                             android:clickable="true"
-                            android:hint="@string/date_placeholder"
-                            />
+                            android:hint="@string/date_placeholder" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

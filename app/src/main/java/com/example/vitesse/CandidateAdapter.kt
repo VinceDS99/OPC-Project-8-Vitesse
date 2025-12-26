@@ -36,7 +36,7 @@ class CandidateAdapter(
 
         fun bind(candidate: Candidate) {
             binding.apply {
-                // Nom complet : Prénom + NOM DE FAMILLE EN MAJUSCULES
+                // Nom complet : Prénom + Nom
                 tvName.text = "${candidate.firstName} ${candidate.lastName.uppercase(Locale.getDefault())}"
 
                 // Notes
@@ -48,9 +48,7 @@ class CandidateAdapter(
                         // Charger l'image depuis l'URI
                         val uri = Uri.parse(candidate.profilePhotoUrl)
                         ivProfilePhoto.setImageURI(uri)
-                        Log.d("CandidateAdapter", "Image chargée depuis URI: $uri")
                     } catch (e: Exception) {
-                        Log.e("CandidateAdapter", "Erreur lors du chargement de l'image: ${e.message}")
                         // En cas d'erreur, utiliser l'image par défaut
                         ivProfilePhoto.setImageResource(R.drawable.default_profile_picture)
                     }

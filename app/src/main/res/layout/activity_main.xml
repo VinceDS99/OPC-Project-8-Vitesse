@@ -74,30 +74,33 @@
         <!-- Onglet Tous -->
         <LinearLayout
             android:id="@+id/tabAll"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="@dimen/margin_medium"
+            android:background="@drawable/tab_ripple"
             android:clickable="true"
+
             android:focusable="true"
-            android:background="@drawable/tab_ripple">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium">
 
             <TextView
                 android:id="@+id/tvTabAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_all"
+                android:textColor="@color/primary"
                 android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"
-                android:textColor="@color/primary" />
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/indicatorAll"
                 android:layout_width="40dp"
-                android:layout_height="@dimen/tab_indicator_height"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/primary"
                 android:visibility="visible" />
 
@@ -111,7 +114,10 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="@dimen/margin_medium"
+
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_medium"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/tab_ripple">
@@ -146,7 +152,7 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="-16dp" />
+/>
 
     <!-- RecyclerView pour la liste des candidats -->
     <androidx.recyclerview.widget.RecyclerView

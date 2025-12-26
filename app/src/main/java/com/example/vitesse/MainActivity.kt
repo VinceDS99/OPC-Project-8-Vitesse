@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
-            // Ajouter un padding en haut pour éviter la barre de statut
+
             view.setPadding(
                 insets.left,
                 insets.top,
@@ -91,32 +91,23 @@ class MainActivity : AppCompatActivity() {
         // TextWatcher pour écouter les changements dans la barre de recherche
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Pas utilisé
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Mettre à jour la recherche à chaque caractère saisi
+                // Met à jour la recherche à chaque caractère saisi
                 val query = s?.toString() ?: ""
                 viewModel.setSearchQuery(query)
                 Log.d("MainActivity", "Recherche: '$query'")
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // Pas utilisé
             }
         })
-
-        // Optionnel : Clic sur l'icône loupe (peut déclencher la recherche ou autre action)
-        binding.ivSearchIcon.setOnClickListener {
-            // Pour l'instant, ne fait rien (la recherche est en temps réel)
-            Log.d("MainActivity", "Icône recherche cliquée")
-        }
     }
 
     private fun setupFab() {
         // Clic sur le bouton d'ajout
         binding.fabAddCandidate.setOnClickListener {
-            Log.d("MainActivity", "FAB cliqué - Navigation vers AddCandidateActivity")
             val intent = Intent(this, AddCandidateActivity::class.java)
             startActivity(intent)
         }
@@ -125,12 +116,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupObservers() {
         // Observer l'état de chargement
         viewModel.isLoading.observe(this) { isLoading ->
-            Log.d("MainActivity", "État de chargement: $isLoading")
 
             // Afficher/masquer le loader
             binding.loadingLayout.isVisible = isLoading
 
-            // Si le chargement est terminé, afficher le contenu
+            // Si le chargement est terminé, la page s'affiche
             if (!isLoading) {
                 updateContentVisibility()
             }
@@ -143,7 +133,6 @@ class MainActivity : AppCompatActivity() {
 
         // Observer les candidats affichés
         viewModel.displayedCandidates.observe(this) { candidates ->
-            Log.d("MainActivity", "Nombre de candidats: ${candidates.size}")
 
             // Soumettre toujours la liste à l'adapter
             adapter.submitList(candidates)

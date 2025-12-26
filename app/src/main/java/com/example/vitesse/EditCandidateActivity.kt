@@ -40,7 +40,7 @@ class EditCandidateActivity : AppCompatActivity() {
             // Afficher la photo sélectionnée
             binding.ivProfilePhoto.setImageURI(uri)
 
-            // IMPORTANT : Obtenir la permission permanente pour cette URI
+
             try {
                 contentResolver.takePersistableUriPermission(
                     uri,

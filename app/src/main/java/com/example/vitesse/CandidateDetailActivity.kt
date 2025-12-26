@@ -26,7 +26,7 @@ class CandidateDetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CANDIDATE_ID = "candidate_id"
-        const val EUR_TO_GBP_RATE = 0.855 // Taux de conversion approximatif
+        const val EUR_TO_GBP_RATE = 0.855 // Taux de conversion
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,11 +133,10 @@ class CandidateDetailActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
-        // Fond transparent avec effet dim
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setDimAmount(0.7f)
 
-        // Gérer les clics sur les boutons
+
         dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel).setOnClickListener {
             dialog.dismiss()
         }

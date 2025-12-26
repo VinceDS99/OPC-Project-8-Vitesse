@@ -34,7 +34,7 @@ class AddCandidateActivity : AppCompatActivity() {
             // Afficher la photo sélectionnée
             binding.ivProfilePhoto.setImageURI(uri)
 
-            // IMPORTANT : Obtenir la permission permanente pour cette URI
+
             try {
                 contentResolver.takePersistableUriPermission(
                     uri,
@@ -72,7 +72,7 @@ class AddCandidateActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
-            // Ajouter un padding en haut pour éviter la barre de statut
+
             view.setPadding(
                 insets.left,
                 insets.top,
@@ -87,7 +87,6 @@ class AddCandidateActivity : AppCompatActivity() {
     private fun setupListeners() {
         // Bouton retour (flèche)
         binding.ivBack.setOnClickListener {
-            Log.d("AddCandidate", "Bouton retour cliqué")
             finish() // Retour à l'écran précédent
         }
 
